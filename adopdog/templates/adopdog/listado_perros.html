@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Listado de Perros</title>
+    <link rel="stylesheet" href="{% static 'adopdog/lista_perros.css' %}">
+</head>
+<body>
+    <h2>Lista de perros</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Raza</th>
+                <th>Edad</th>
+                <th>Tamaño</th>
+                <th>Estado</th>
+                <th>Vacunado</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for perro in perros %}
+            <tr>
+                <td>{{ perro.id }}</td>
+                <td>{{ perro.nombre }}</td>
+                <td>{{ perro.raza }}</td>
+                <td>{{ perro.edad }}</td>
+                <td>{{ perro.tamano }}</td>
+                <td>{{perro.estado_de_adopcion}}</td>
+                <td>{%if perro.vacunado %}SI{% else %}No{% endif %}</td><!--Para que no muestre SI o NO-->
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" style="text-align:center;">No hay perros registrados.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        
+    </table>
+    <a href="{% url 'vista_index' %}" class="button">Volver</a>
+
+</body>
+</html>
+

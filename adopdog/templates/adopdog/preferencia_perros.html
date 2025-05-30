@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Perros por preferencias</title>
+    <link rel="stylesheet" href="{% static 'adopdog/lista_perros.css' %}">
+</head>
+<body>
+    <h2>Resultados:</h2>
+    {% if perros %}
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Raza</th>
+                <th>Edad</th>
+                <th>Tamaño</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for perro in perros %}
+            <tr>
+                <td>{{ perro.nombre }}</td>
+                <td>{{ perro.raza }}</td>
+                <td>{{ perro.edad }}</td>
+                <td>{{ perro.tamano }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No se encontraron perros que coincidan con tus preferencias.</p>
+    {% endif %}
+    
+    <a href="{% url 'vista_index' %}" class="button">Volver</a>
+
+    
+    
+
+</body>
+</html>

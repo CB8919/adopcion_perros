@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Cargar un nuevo perro</h2>
+    <form method="post">
+        {% csrf_token %}
+        Nombre: <input type="text" name="nombre"><br>
+        Raza: <input type="text" name="raza"><br>
+        Edad: <input type="number" name="edad"><br>
+        Tamaño: <input type="text" name="tamano"><br>
+        Peso: <input type="number" name="peso"><br>
+        Salud: <input type="text" name="salud"><br>
+        Vacunado: <input type="checkbox" name="vacunado"><br>
+        Temperamento: <input type="text" name="temperamento"><br>
+        <button type="submit">Guardar</button>
+</form>
+</body>
+</html>
