@@ -27,7 +27,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'poDBBdW_4BumFjOBIfSP36H_jpZPoS
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['adopdog.onrender.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
