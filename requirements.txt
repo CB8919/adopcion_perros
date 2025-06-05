@@ -1,3 +1,4 @@
+whitenoise==6.4.0
 asgiref==3.8.1
 Django==5.2.1
 gunicorn==23.0.0
