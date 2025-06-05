@@ -1,0 +1,126 @@
+/* Estilos generales */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f9f9f9;
+}
+
+/* Nav con header centrado vertical y horizontal */
+nav {
+  background-color: #0077cc;
+  color: white;
+  height: 200px; /* altura fija para centrar contenido */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 20px;
+}
+
+nav header h1 {
+  margin: 0;
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+nav header p {
+  margin-top: 10px;
+  font-size: 1.2rem;
+  font-style: italic;
+}
+
+/* Contenedor general para los divs .menu-box */
+.menu-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* centramos la fila */
+  gap: 20px;
+  padding: 20px;
+}
+
+/* Cada caja con ancho fijo para que entren 3 en fila */
+.menu-box {
+  background-color: white;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  padding: 20px;
+  box-sizing: border-box;
+  width: calc(33.333% - 20px); /* 3 en fila con gap */
+  min-width: 280px; /* mínimo ancho para móviles */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Encabezados dentro de cada box */
+.menu-box h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #0077cc;
+  font-size: 1.5rem;
+}
+
+/* Formularios: un poco de espacio entre elementos */
+form label {
+  display: block;
+  margin: 8px 0 4px;
+  font-weight: 600;
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="number"],
+form select {
+  width: 100%;
+  padding: 6px 8px;
+  margin-bottom: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+form input[type="checkbox"] {
+  margin-right: 6px;
+}
+
+form button {
+  background-color: #0077cc;
+  border: none;
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+form button:hover {
+  background-color: #005fa3;
+}
+
+/* Mensajes */
+ul.messages {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 10px;
+}
+
+ul.messages li {
+  padding: 8px;
+  border-radius: 4px;
+  margin-bottom: 6px;
+  font-size: 0.9rem;
+}
+
+/* Ajuste responsivo para pantallas pequeñas */
+@media (max-width: 900px) {
+  .menu-box {
+    width: calc(50% - 20px);
+  }
+}
+
+@media (max-width: 600px) {
+  .menu-box {
+    width: 100%;
+  }
+}
+
