@@ -35,5 +35,6 @@ Este sistema fue pensado desde una lógica de negocio:
 
 ## 📷 Capturas
 
-<img width="1280" height="620" alt="ADOPDOG" src="https://github.com/user-attachments/assets/046c913a-4e3d-4c1f-a4b8-864cf909388d" />
+<img width="1909" height="931" alt="image" src="https://github.com/user-attachments/assets/72b7ed1c-8d40-40dc-b80e-38fc04426715" />
+
 
