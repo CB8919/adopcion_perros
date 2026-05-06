@@ -1,126 +1,121 @@
-/* Estilos generales */
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* BODY */
 body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f9f9f9;
+    font-family: Arial, sans-serif;
+    background: #f1f5f9;
+    color: #1e293b;
 }
 
-/* Nav con header centrado vertical y horizontal */
+/* LAYOUT GENERAL */
+.layout {
+    display: flex;
+}
+
+/* SIDEBAR */
 nav {
-  background-color: #0077cc;
-  color: white;
-  height: 200px; /* altura fija para centrar contenido */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 0 20px;
+    width: 250px;
+    height: 100vh;
+    background: #0f172a;
+    padding: 20px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    color: white;
 }
 
-nav header h1 {
-  margin: 0;
-  font-size: 2.5rem;
-  font-weight: bold;
+/* TITULO SIDEBAR */
+nav h1 {
+    margin-bottom: 10px;
 }
 
-nav header p {
-  margin-top: 10px;
-  font-size: 1.2rem;
-  font-style: italic;
+nav p {
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: #94a3b8;
 }
 
-/* Contenedor general para los divs .menu-box */
-.menu-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center; /* centramos la fila */
-  gap: 20px;
-  padding: 20px;
+/* LINKS SIDEBAR (UNIFICADO) */
+nav a {
+    display: block;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 6px;
+    color: #cbd5f5;
+    margin: 8px 0;
+    transition: 0.2s;
 }
 
-/* Cada caja con ancho fijo para que entren 3 en fila */
-.menu-box {
-  background-color: white;
-  box-shadow: 0 0 5px rgba(0,0,0,0.1);
-  border-radius: 8px;
-  padding: 20px;
-  box-sizing: border-box;
-  width: calc(33.333% - 20px); /* 3 en fila con gap */
-  min-width: 280px; /* mínimo ancho para móviles */
-  display: flex;
-  flex-direction: column;
+nav a:hover {
+    background: #1e293b;
+    color: #38bdf8;
 }
 
-/* Encabezados dentro de cada box */
-.menu-box h3 {
-  margin-top: 0;
-  margin-bottom: 15px;
-  color: #0077cc;
-  font-size: 1.5rem;
+/* CONTENIDO */
+main {
+    margin-left: 250px;
+    width: calc(100% - 250px);
+    padding: 40px;
 }
 
-/* Formularios: un poco de espacio entre elementos */
-form label {
-  display: block;
-  margin: 8px 0 4px;
-  font-weight: 600;
+main section {
+    width: 60%;
+    margin: 0 auto;
 }
 
-form input[type="text"],
-form input[type="email"],
-form input[type="number"],
-form select {
-  width: 100%;
-  padding: 6px 8px;
-  margin-bottom: 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
+/* TITULOS */
+h2 {
+    margin-bottom: 20px;
 }
 
-form input[type="checkbox"] {
-  margin-right: 6px;
+/* FORM */
+form {
+    display: flex;
+    flex-direction: column;
 }
 
-form button {
-  background-color: #0077cc;
-  border: none;
-  color: white;
-  padding: 10px;
-  cursor: pointer;
-  font-size: 1rem;
-  border-radius: 4px;
-  transition: background-color 0.3s ease;
-}
-
-form button:hover {
-  background-color: #005fa3;
-}
-
-/* Mensajes */
-ul.messages {
-  list-style: none;
-  padding-left: 0;
-  margin-bottom: 10px;
-}
-
-ul.messages li {
-  padding: 8px;
-  border-radius: 4px;
-  margin-bottom: 6px;
-  font-size: 0.9rem;
-}
-
-/* Ajuste responsivo para pantallas pequeñas */
-@media (max-width: 900px) {
-  .menu-box {
-    width: calc(50% - 20px);
-  }
-}
-
-@media (max-width: 600px) {
-  .menu-box {
+/* INPUTS MEJORADOS */
+input, select {
     width: 100%;
-  }
+    padding: 10px;
+    margin: 8px 0 16px;
+
+    border: 1px solid #cbd5e1; 
+    border-radius: 6px;
+    background: white;
 }
 
+/* CHECKBOX */
+input[type="checkbox"] {
+    width: auto;
+    margin-right: 5px;
+}
+
+/* BOTONES */
+button {
+    padding: 10px;
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    background: #1d4ed8;
+}
+
+/* MENSAJES */
+li {
+    background: #dcfce7;
+    color: #166534;
+    padding: 8px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}

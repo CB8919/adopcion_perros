@@ -1,276 +1,245 @@
-{% load static %}<!--Para que acceda archivos staticos (CSS)-->
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'adopdog/index.css' %}">
     <title>ADOPDOG</title>
-    <link rel="stylesheet" href="{% static 'adopdog/index.css' %}" />
-   
 </head>
+
 <body>
-    
-    <nav>
-        <header>
-        <h1>Bienvenidos a ADOPDOG</h1>
-        <p>Donde una nueva historia comienza con un ladrido.</p>
-        </header>
-    </nav>
-    
-    <div class="menu-container">
-        <div class="menu-box">
-        <h3>Registrar perro</h3>
-        {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-                {% if 'agregar_perro' in message.extra_tags %}
-                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    <div class="layout">
+        <nav>
+            <h1>ADOPDOG</h1>
+            <p>Panel de gestión</p>
+
+            <hr>
+            <a href="#" onclick="mostrarSeccion('registrar')">Registrar</a>
+            <a href="#" onclick="mostrarSeccion('eliminar')">Eliminar</a>
+            <a href="#" onclick="mostrarSeccion('usuario')">Usuario</a>
+            <a href="#" onclick="mostrarSeccion('postular')">Postular</a>
+            <a href="#" onclick="mostrarSeccion('confirmar')">Confirmar</a>
+            <a href="#" onclick="mostrarSeccion('preferencias')">Preferencias</a>
+            <a href="#" onclick="mostrarSeccion('listado')">Listado</a>
+        </nav>
+
+        <main>
+            {% block content %}
+
+            <!-- REGISTRAR -->
+            <section id="registrar">
+                <h2>Registrar Perro</h2>
+
+                {% if messages %}
+                    <ul>
+                        {% for message in messages %}
+                            {% if 'agregar_perro' in message.extra_tags %}
+                                <li>{{ message }}</li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
                 {% endif %}
-            {% endfor %}
-        </ul>
-        {% endif %}
-        <form method="post" action="{% url 'vista_agregar_perro' %}">
-            {% csrf_token %}<!--Es un token de seguridad contra ataques CSRF(Cross-Site Request Forgery)-->
-            <label for="nombre_perro">Nombre:</label>
-            <input type="text" name="nombre" id="nombre_perro" required /><br />
 
-            <label for="raza">Raza:</label>
-            <select name="raza" id="raza" required>
-                <option value="">-- Seleccionar --</option>
-                <option value="Labrador">Labrador</option>
-                <option value="Caniche">Caniche</option>
-                <option value="Ovejero Alemán">Ovejero Alemán</option>
-                <option value="Golden Retriever">Golden Retriever</option>
-                <option value="Beagle">Beagle</option>
-                <option value="Bulldog">Bulldog</option>
-                <option value="Boxer">Boxer</option>
-                <option value="Dálmata">Dálmata</option>
-                <option value="Pug">Pug</option>
-                <option value="Mestizo">Mestizo</option>
-            </select><br />
+                <form method="post" action="{% url 'vista_agregar_perro' %}">
+    {% csrf_token %}
 
-            <label for="edad">Edad:</label>
-            <select name="edad" id="edad" required>
-                <option value="">-- Seleccionar --</option>
-                <option value="Cachorro">Cachorro</option>
-                <option value="Joven">Joven</option>
-                <option value="Anciano">Anciano</option>
-            </select><br />
+    <label>Nombre:</label>
+    <input type="text" name="nombre" placeholder="Nombre" required>
 
-            <label for="tamano">Tamaño:</label>
-            <select name="tamano" id="tamano" required>
-                <option value="">-- Seleccionar --</option>
-                <option value="pequeno">Pequeño</option>
-                <option value="mediano">Mediano</option>
-                <option value="grande">Grande</option>
-            </select><br />
+    <label>Raza:</label>
+    <select name="raza" required>
+        <option value="">-- Seleccionar --</option>
+        <option>Labrador</option>
+        <option>Caniche</option>
+    </select>
 
-            <label for="peso">Peso (kg):</label>
-            <input type="number" name="peso" id="peso" min="0" required /><br />
+    <label>Edad:</label>
+    <select name="edad" required>
+        <option value="">-- Seleccionar --</option>
+        <option>Cachorro</option>
+        <option>Joven</option>
+        <option>Anciano</option>
+    </select>
 
-            <label for="salud">Salud:</label>
-            <select name="salud" id="salud" required>
-                <option value="">-- Seleccionar --</option>
-                <option value="Buena">Buena</option>
-                <option value="Regular">Regular</option>
-                <option value="Delicada">Delicada</option>
-            </select><br />
+    <label>Tamaño:</label>
+    <select name="tamano" required>
+        <option value="">-- Seleccionar --</option>
+        <option value="pequeno">Pequeño</option>
+        <option value="mediano">Mediano</option>
+        <option value="grande">Grande</option>
+    </select>
 
-            <label for="vacunado">
-                <input type="checkbox" name="vacunado" id="vacunado" />
-                Vacunado
-            </label><br />
+    <label>Peso (kg):</label>
+    <input type="number" name="peso" step="0.1" required>
 
-            <label for="temperamento">Temperamento:</label>
-            <select name="temperamento" id="temperamento" required>
-                <option value="">-- Seleccionar --</option>
-                <option value="Tranquilo">Tranquilo</option>
-                <option value="Activo">Activo</option>
-                <option value="Juguetón">Juguetón</option>
-                <option value="Tímido">Tímido</option>
-                <option value="Protectivo">Protectivo</option>
-            </select><br />
+    <label>Salud:</label>
+    <select name="salud" required>
+        <option value="">-- Seleccionar --</option>
+        <option>Buena</option>
+        <option>Regular</option>
+        <option>Delicada</option>
+    </select>
 
-            <button type="submit">Guardar</button>
-        </form><br />
+    <label>
+        <input type="checkbox" name="vacunado">
+        Vacunado
+    </label>
 
-        <h3>Eliminar Perro</h3>
-        {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-            {% if 'eliminar_perro' in message.tags %}
-            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-            {% endif %}
-            {% endfor %}
-        </ul>
-        {% endif %}
-        <form method="post" action="{% url 'vista_eliminar_perro' %}">
-            {% csrf_token %}
-            <label for="id_perro_eliminar">ID del perro a eliminar:</label>
-            <input type="number" name="id" id="id_perro_eliminar" required />
-            <button type="submit">Eliminar</button>
-        </form>
+    <label>Temperamento:</label>
+    <select name="temperamento" required>
+        <option value="">-- Seleccionar --</option>
+        <option>Tranquilo</option>
+        <option>Activo</option>
+        <option>Juguetón</option>
+        <option>Tímido</option>
+        <option>Protectivo</option>
+    </select>
+
+    <button type="submit">Guardar</button>
+</form>
+            </section>
+
+            <!-- ELIMINAR -->
+            <section id="eliminar">
+                <h2>Eliminar Perro</h2>
+                <form method="post" action="{% url 'vista_eliminar_perro' %}">
+                    {% csrf_token %}
+                    <input type="number" name="id" placeholder="ID perro" required>
+                    <button type="submit">Eliminar</button>
+                </form>
+            </section>
+
+            <!-- USUARIO -->
+            <section id="usuario">
+                <h2>Registrar Usuario</h2>
+                <form method="post" action="{% url 'vista_registrar_user' %}">
+                    {% csrf_token %}
+                    <input type="text" name="nombre" placeholder="Nombre" required>
+                    <input type="text" name="dni" placeholder="DNI" required>
+                    <input type="email" name="email" placeholder="Email" required>
+                    <button type="submit">Registrar</button>
+                </form>
+            </section>
+
+            <!-- POSTULAR -->
+            <section id="postular">
+                <h2>Postular</h2>
+                <form method="post" action="{% url 'vista_postular_perro' %}">
+                    {% csrf_token %}
+                    <input type="number" name="id_perro" placeholder="ID perro" required>
+                    <input type="text" name="nombre" placeholder="Nombre" required>
+                    <input type="email" name="email" placeholder="Email" required>
+                    <button type="submit">Postular</button>
+                </form>
+            </section>
+
+            <!-- CONFIRMAR -->
+            <section id="confirmar">
+                <h2>Confirmar Adopción</h2>
+                <form method="post" action="{% url 'vista_confirmar_adopcion' %}">
+                    {% csrf_token %}
+                    <input type="text" name="id_perro" placeholder="ID perro" required>
+                    <button type="submit">Confirmar</button>
+                </form>
+            </section>
+
+            <!-- PREFERENCIAS -->
+            <section id="preferencias">
+    <h2>Preferencias</h2>
+
+    <form method="get" action="{% url 'vista_preferencia_perros' %}">
+
+        <label>Raza:</label>
+        <select name="raza">
+            <option value="">-- Todas --</option>
+            <option value="Labrador">Labrador</option>
+            <option value="Caniche">Caniche</option>
+            <option value="Ovejero Alemán">Ovejero Alemán</option>
+            <option value="Golden Retriever">Golden Retriever</option>
+            <option value="Beagle">Beagle</option>
+            <option value="Bulldog">Bulldog</option>
+            <option value="Boxer">Boxer</option>
+            <option value="Dálmata">Dálmata</option>
+            <option value="Pug">Pug</option>
+            <option value="Mestizo">Mestizo</option>
+        </select>
+
+        <label>Edad:</label>
+        <select name="edad">
+            <option value="">-- Todas --</option>
+            <option value="Cachorro">Cachorro</option>
+            <option value="Joven">Joven</option>
+            <option value="Anciano">Anciano</option>
+        </select>
+
+        <label>Tamaño:</label>
+        <select name="tamano">
+            <option value="">-- Todos --</option>
+            <option value="pequeno">Pequeño</option>
+            <option value="mediano">Mediano</option>
+            <option value="grande">Grande</option>
+        </select>
+
+        <label>Salud:</label>
+        <select name="salud">
+            <option value="">-- Todas --</option>
+            <option value="Buena">Buena</option>
+            <option value="Regular">Regular</option>
+            <option value="Delicada">Delicada</option>
+        </select>
+
+        <label>
+            <input type="checkbox" name="vacunado">
+            Vacunado
+        </label>
+
+        <label>Temperamento:</label>
+        <select name="temperamento">
+            <option value="">-- Todos --</option>
+            <option value="Tranquilo">Tranquilo</option>
+            <option value="Activo">Activo</option>
+            <option value="Juguetón">Juguetón</option>
+            <option value="Tímido">Tímido</option>
+            <option value="Protectivo">Protectivo</option>
+        </select>
+
+        <button type="submit">Filtrar</button>
+    </form>
+</section>
+
+            <!-- LISTADO -->
+            <section id="listado">
+                <h2>Listado</h2>
+                <form method="post" action="{% url 'listado_perros' %}">
+                    {% csrf_token %}
+                    <button type="submit">Ver listado</button>
+                </form>
+                
+            </section>
+            {% endblock %}
+        </main>
     </div>
 
-    <div class="menu-box">
-        <h3>2. Registro de usuarios</h3>
+    <!-- SCRIPT -->
+    <script>
+        function mostrarSeccion(id) {
+            const secciones = document.querySelectorAll("main section");
 
-        {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-            {% if 'registrar_user' in message.tags %}
-            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-            {% endif %}
-            {% endfor %}
-        </ul>
-        {% endif %}
+            secciones.forEach(sec => {
+                sec.style.display = "none";
+            });
 
-        <form action="{% url 'vista_registrar_user' %}" method="POST">
-            {% csrf_token %}
-            <label for="nombre_usuario">Nombre:</label>
-            <input type="text" name="nombre" id="nombre_usuario" required /><br />
+            const activa = document.getElementById(id);
+            if (activa) {
+                activa.style.display = "block";
+            }
+        }
 
-            <label for="dni">DNI:</label>
-            <input type="text" name="dni" id="dni" required /><br />
-
-            <label for="email">Email:</label>
-            <input type="email" name="email" id="email" required /><br />
-
-            <button type="submit">Registrarse</button>
-        </form>
-    </div>
-
-    <div class="menu-box">
-        <h3>3. Postular un perro</h3>
-        {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-            {% if 'postular_perro' in message.tags %}
-            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-            {% endif %}
-            {% endfor %}
-        </ul>
-        {% endif %}
-        <form method="post" action="{% url 'vista_postular_perro' %}">
-            {% csrf_token %}
-            <label for="id_perro_postular">ID del perro:</label>
-            <input type="number" name="id_perro" id="id_perro_postular" required /><br />
-            <label for="id_usuario_postular">ID del usuario:</label>
-            <input type="number" name="id_usuario" id="id_usuario_postular" required /><br />
-            <button type="submit">Postular</button>
-        </form>
-    </div>
-
-    <div class="menu-box">
-        <h3>4. Confirmar una adopción</h3>
-        {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-            {% if 'confirmar_adopcion' in message.tags %}
-            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-            {% endif %}
-            {% endfor %}
-        </ul>
-        {% endif %}
-        <form method="post" action="{% url 'vista_confirmar_adopcion' %}">
-            {% csrf_token %}
-            <label for="id_perro_confirmar">ID Perro:</label>
-            <input type="text" name="id_perro" id="id_perro_confirmar" required /><br />
-            <button type="submit">Confirmar</button>
-        </form>
-    </div>
-
-    <div class="menu-box">
-        <h3>5. Preferencia de perros</h3>
-        <form method="get" action="{% url 'vista_preferencia_perros' %}">
-            <label for="raza_preferencia">Raza:</label>
-            <select name="raza" id="raza_preferencia">
-                <option value="">-- Todas --</option>
-                <option value="Labrador">Labrador</option>
-                <option value="Caniche">Caniche</option>
-                <option value="Ovejero">Ovejero</option>
-                <option value="Golden Retriever">Golden Retriever</option>
-                <option value="Beagle">Beagle</option>
-                <option value="Bulldog">Bulldog</option>
-                <option value="Boxer">Boxer</option>
-                <option value="Dálmata">Dálmata</option>
-                <option value="Pug">Pug</option>
-                <option value="Cocker Spaniel">Cocker Spaniel</option>
-                <option value="Rottweiler">Rottweiler</option>
-                <option value="Schnauzer">Schnauzer</option>
-                <option value="Shar Pei">Shar Pei</option>
-                <option value="Mestizo">Mestizo</option>
-            </select><br />
-
-            <label for="edad_preferencia">Edad:</label>
-            <select name="edad" id="edad_preferencia">
-                <option value="">-- Todas --</option>
-                <option value="Cachorro">Cachorro</option>
-                <option value="Joven">Joven</option>
-                <option value="Anciano">Anciano</option>
-            </select><br />
-
-            <label for="tamano_preferencia">Tamaño:</label>
-            <select name="tamano" id="tamano_preferencia">
-                <option value="">-- Todos --</option>
-                <option value="pequeno">Pequeño</option>
-                <option value="mediano">Mediano</option>
-                <option value="grande">Grande</option>
-            </select><br />
-
-            <label for="salud_preferencia">Salud:</label>
-            <select name="salud" id="salud_preferencia">
-                <option value="">-- Todas --</option>
-                <option value="Buena">Buena</option>
-                <option value="Regular">Regular</option>
-                <option value="Delicada">Delicada</option>
-            </select><br />
-
-            <label for="vacunado_preferencia">
-                <input type="checkbox" name="vacunado" id="vacunado_preferencia" />
-                Vacunado
-            </label><br />
-
-            <label for="temperamento_preferencia">Temperamento:</label>
-            <select name="temperamento" id="temperamento_preferencia">
-                <option value="">-- Todos --</option>
-                <option value="Tranquilo">Tranquilo</option>
-                <option value="Activo">Activo</option>
-                <option value="Juguetón">Juguetón</option>
-                <option value="Tímido">Tímido</option>
-                <option value="Protectivo">Protectivo</option>
-            </select><br />
-
-            <button type="submit">Filtrar</button>
-        </form>
-
-        {% if perros_filtrados %}
-        <h4>Perros que coinciden con tus preferencias:</h4>
-        <ul>
-            {% for perro in perros_filtrados %}
-                <li>ID: {{ perro.id }} - {{ perro.nombre }} ({{ perro.raza }})</li>
-            {% empty %}
-                <li>No hay perros que coincidan con esos criterios.</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
-    </div>
-    
-    <div class="menu-box">
-        <h3>4. Listado de Perros</h3>
-        
-        <form method="post" action="{% url 'listado_perros' %}">
-            {% csrf_token %}
-            <label for="id_perro_confirmar">Ver lista:</label><br>
-            
-            <button type="submit">Confirmar</button>
-        </form>
-    </div>
-
-    </div>
-    
-    
-   
+        // Mostrar por defecto
+        window.onload = function() {
+            mostrarSeccion("registrar");
+        }
+    </script>
 
 </body>
 </html>
